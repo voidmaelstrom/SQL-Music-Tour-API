@@ -7,13 +7,39 @@ const { Band } = db
 // FIND ALL BANDS
 bands.get('/', async (req, res) => {
   try {
-    const foundBands = await Band.findAll({
+    const foundBandNames = await Band.findAll({
       order: [ [ 'available_start_time', 'ASC' ] ],
       where: {
         name: { [Op.like]: `%${req.query.name ? req.query.name : ''}%` }
       }
     })
-      res.status(200).json(foundBands)
+
+    const foundBandIds = await Band.findAll({
+      order: [ [ 'available_start_time', 'ASC' ] ],
+      where: {
+        band_id: { [Op.eq]: req.query.id }
+      }
+    })
+
+    const foundBandGenres = await Band.findAll({
+      order: [ [ 'available_start_time', 'ASC' ] ],
+      where: {
+        genre: { [Op.like]: `%${req.query.genre ? req.query.genre : ''}%` }
+      }
+    })
+
+    if(req.query.id) {
+      res.status(200).json(foundBandIds)
+    }
+
+    if(req.query.name) {
+      res.status(200).json(foundBandNames)
+    }
+
+    if(req.query.genre) {
+      res.status(200).json(foundBandGenres)
+    }
+
   } catch (error) {
       res.status(500).json(error)
   }
