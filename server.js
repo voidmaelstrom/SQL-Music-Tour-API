@@ -11,13 +11,13 @@ app.use(express.urlencoded({ extended: false }))
 // SEQUELIZE CONNECTION
 const sequelize = new Sequelize({password: "thrive", username: "thrive", host: "localhost", port: 5432, database: "music-tour", dialect: "postgres"})
 
-// try {
-//     sequelize.authenticate() 
-//     console.log(`Connected with Sequelize at ${process.env.PG_URI}`) 
-//     console.log('Authenticated!!')
-// } catch(err) {
-//     console.log(`Unable to connect to PG: ${err}`) 
-// }
+try {
+    sequelize.authenticate() 
+    console.log(`Connected with Sequelize at ${process.env.PG_URI}`) 
+    console.log('Authenticated!!')
+} catch(err) {
+    console.log(`Unable to connect to PG: ${err}`) 
+}
 
 // ROOT
 app.get('/', (req, res) => {
