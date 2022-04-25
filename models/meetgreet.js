@@ -38,8 +38,8 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'MeetGreet',
-    tableName: 'meet_greets',
+    tableName: 'MeetGreets',
     timestamps: false
   })
-  return MeetGreet
+  return MeetGreet;
 }

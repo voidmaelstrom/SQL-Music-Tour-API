@@ -30,8 +30,8 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'StageEvent',
-    tableName: 'stage_events',
+    tableName: 'StageEvents',
     timestamps: false,
   })
-  return StageEvent
+  return StageEvent;
 }
