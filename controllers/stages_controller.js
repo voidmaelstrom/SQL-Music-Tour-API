@@ -18,7 +18,27 @@ stages.get('/', async (req, res) => {
     }
 })
 
-// FIND A SPECIFIC STAGE
+// FIND A SPECIFIC STAGE WITH NAME JUST AFTER ROUTE
+stages.get('/:name', async (req, res) => {
+    try {
+        const foundStage = await Stage.findOne({
+            where: { stage_name: req.params.name },
+            include:{ 
+                model: Event, 
+                as: "events",
+                through: { attributes: [] }
+            },
+            order: [
+                [{ model: Event, as: "events" }, 'date', 'ASC'],
+            ]
+        })
+        res.status(200).json(foundStage)
+    } catch (error) {
+        res.status(500).json(error)
+    }
+})
+
+// FIND A SPECIFIC STAGE by NAME
 stages.get('/name/:name', async (req, res) => {
     try {
         const foundStage = await Stage.findOne({
